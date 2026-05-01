@@ -1,12 +1,15 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import HomeHeader from '../../components/HomeHeader';
-import DashboardGrid from '../../components/DashboardGrid';
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import DashboardGrid from "../../components/DashboardGrid";
+import HomeHeader from "../../components/HomeHeader";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         <HomeHeader />
         <DashboardGrid />
       </ScrollView>
@@ -17,9 +20,9 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
   },
   scrollContent: {
-    paddingBottom: 150, // Space for custom bottom tab bar
+    paddingBottom: 150,
   },
 });
