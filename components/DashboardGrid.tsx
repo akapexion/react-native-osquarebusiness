@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, FlatList } from 'react-native';
 import { FontAwesome, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 const gridData = [
@@ -17,38 +17,43 @@ const gridData = [
 export default function DashboardGrid() {
   const { width } = useWindowDimensions();
   const numColumns = width < 450 ? 2 : width < 800 ? 3 : 4;
-  const gap = 15;
-  const paddingHorizontal = 15;
-  const cardWidth = (width - (paddingHorizontal * 2) - (gap * (numColumns - 1))) / numColumns;
 
   return (
-    <View style={[styles.gridContainer, { gap }]}>
-      {gridData.map((item) => (
-        <TouchableOpacity key={item.id} style={[styles.gridItem, { width: cardWidth }]}>
+    <FlatList
+      key={numColumns}
+      data={gridData}
+      keyExtractor={(item) => item.id}
+      numColumns={numColumns}
+      contentContainerStyle={styles.gridContainer}
+      columnWrapperStyle={styles.columnWrapper}
+      renderItem={({ item }) => (
+        <TouchableOpacity style={styles.gridItem}>
           <View style={[styles.iconContainer, { backgroundColor: item.bgColor }]}>
             <item.IconFamily name={item.iconName as any} size={28} color={item.color} />
           </View>
           <Text style={styles.gridItemText}>{item.title}</Text>
         </TouchableOpacity>
-      ))}
-    </View>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     paddingHorizontal: 15,
     marginTop: 30,
-    zIndex: 2,
+    gap: 15,
+    paddingBottom: 30,
+  },
+  columnWrapper: {
+    gap: 15,
   },
   gridItem: {
+    flex: 1,
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     paddingVertical: 20,
     alignItems: 'center',
-    marginBottom: 15,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
