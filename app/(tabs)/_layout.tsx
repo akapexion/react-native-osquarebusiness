@@ -1,38 +1,49 @@
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { AntDesign, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const CustomTabBarButton = ({ children, onPress }: any) => (
-  <TouchableOpacity
-    style={{
-      top: -20,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-    onPress={onPress}
-  >
+const CustomTabBarButton = ({ children, onPress, style }: any) => (
+  <View style={[style, { justifyContent: 'center', alignItems: 'center' }]}>
     <View style={{
-      width: 60,
-      height: 60,
-      borderRadius: 30,
-      backgroundColor: '#272E5C', // the dark blue from the header
-      justifyContent: 'center',
-      alignItems: 'center',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 5,
+      position: 'absolute',
+      top: -32,
+      width: 76,
+      height: 76,
+      borderRadius: 38,
+      backgroundColor: '#F5F5F5',
+    }} />
+    <TouchableOpacity
+      style={{
+        position: 'absolute',
+        top: -24,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: '#272E5C',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#272E5C',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        elevation: 5,
+      }}
+      onPress={onPress}
+    >
+      <AntDesign name="qrcode" size={30} color="#fff" />
+    </TouchableOpacity>
+    <Text style={{
+      position: 'absolute',
+      bottom: 8,
+      fontSize: 10,
+      fontWeight: '600',
+      color: '#A0A0A0',
     }}>
-      {children}
-    </View>
-    <View style={{ marginTop: 2 }}>
-      {/* Optional space below FAB to push the text if we want */}
-    </View>
-  </TouchableOpacity>
+      FAQ
+    </Text>
+  </View>
 );
 
 export default function TabLayout() {
@@ -42,7 +53,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: '#272E5C',
-        tabBarInactiveTintColor: '#A0A0A0',
+        tabBarInactiveTintColor: '#000',
         headerShown: false,
         tabBarShowLabel: true,
         tabBarStyle: {
@@ -51,12 +62,13 @@ export default function TabLayout() {
           left: 0,
           right: 0,
           elevation: 0,
-          backgroundColor: '#EAEAEA',
+          borderTopWidth: 0,
+          backgroundColor: '#E1E1E1',
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           height: 70,
-          paddingBottom: 10,
-          paddingTop: 10,
+          paddingBottom: 8,
+          paddingTop: 12,
         },
         tabBarLabelStyle: {
           fontSize: 10,
@@ -74,7 +86,7 @@ export default function TabLayout() {
         name="progress"
         options={{
           title: 'Progress',
-          tabBarIcon: ({ color }) => <Ionicons size={24} name="stats-chart" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="insights" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -90,14 +102,14 @@ export default function TabLayout() {
         name="notification"
         options={{
           title: 'Notification',
-          tabBarIcon: ({ color }) => <Ionicons size={24} name="notifications" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome size={22} name="bell" color={color} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <FontAwesome size={24} name="user" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={24} name="person" color={color} />,
         }}
       />
     </Tabs>
