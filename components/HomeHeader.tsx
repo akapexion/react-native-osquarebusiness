@@ -32,7 +32,7 @@ export default function HomeHeader() {
           </View>
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Asad Khan</Text>
-            <Text style={styles.profileId}>EmpID : AK199</Text>
+            <Text style={styles.profileId}>ID : AK199</Text>
           </View>
         </View>
       </SafeAreaView>
